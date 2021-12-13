@@ -17,6 +17,8 @@ Since this is looking specifically for LDAP traffic it:
 * Cannot detect exploitation using any other [potentially vulnerable provider](https://sourcegraph.com/search?q=context:global+%28repo:AdoptOpenJDK/openjdk-jdk11u+OR+repo:AdoptOpenJDK/openjdk-jdk8%29+public+class.*URLContextFactory&patternType=regexp)
 * Cannot detect simple envvar exfiltration going on using any provider (e.g. as mentioned [here](https://twitter.com/log4j2rce/status/1469799982630944770))
 
+And finally, due to the way this hooks network traffic it's (currently) unable to provide the target hostname/IP that the LDAP connection was made to. It can only tell what Java process made the suspicious connection.
+
 ## Alternative Things
 
 * [Logout4Shell](https://github.com/Cybereason/Logout4Shell) and [Amazon's hotpatch](https://github.com/corretto/hotpatch-for-apache-log4j2) dynamically patch the main "bad" function (`lookup`) in a running JVM instance to varying extents.
